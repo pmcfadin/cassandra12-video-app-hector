@@ -11,6 +11,12 @@ import me.prettyprint.hector.api.factory.HFactory;
 public class Runner {
 
 
+	// CHANGE ME!! If you have a different cluster name, this is the place to change it.
+	private static final String CLUSTER_NAME = "Test Cluster";
+	
+	// If you used the database setup file with this project, the default should be fine. Change if you need to.
+	private static final String KEYSPACE = "Killervideo";
+	
 	/**
 	 * @param args
 	 */
@@ -20,8 +26,8 @@ public class Runner {
 
 		UUID videoId = UUID.randomUUID();
 
-		Cluster myCluster = HFactory.getOrCreateCluster("Vagrant Cluster", "localhost:9160");
-		Keyspace keyspace = HFactory.createKeyspace("test", myCluster);
+		Cluster myCluster = HFactory.getOrCreateCluster(CLUSTER_NAME, "localhost:9160");
+		Keyspace keyspace = HFactory.createKeyspace(KEYSPACE, myCluster);
 
 		// Create a user and video for testing
 		User user = new User("pmcfadin", "secretPassword123", "Patrick", "McFadin");
@@ -48,7 +54,8 @@ public class Runner {
 		bl.setRating(videoId, 4, keyspace);
 
 		System.out.println("Setting a start event");
-		bl.setVideoStartEvent(videoId, "pmcfadin", new Timestamp(new java.util.Date().getTime()), keyspace);
+		Timestamp startEvent = new Timestamp(new java.util.Date().getTime());
+		bl.setVideoStartEvent(videoId, "pmcfadin", startEvent, keyspace);
 
 		System.out.println("Setting a stop event");
 		Timestamp stopEvent = new Timestamp(new java.util.Date().getTime());

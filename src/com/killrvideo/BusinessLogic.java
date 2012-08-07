@@ -9,7 +9,6 @@ import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.serializers.UUIDSerializer;
 import me.prettyprint.hector.api.Keyspace;
 import me.prettyprint.hector.api.beans.ColumnSlice;
-import me.prettyprint.hector.api.beans.Composite;
 import me.prettyprint.hector.api.exceptions.HectorException;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
@@ -133,6 +132,7 @@ public class BusinessLogic {
 
 	public ArrayList<String> getComments(UUID videoId) {
 		// TODO Implement
+		
 		return null;
 	}
 
@@ -152,19 +152,16 @@ public class BusinessLogic {
 
 	public float getRating(UUID videoId) {
 		// TODO Implement
+		
+		
 		return 0;
 	}
 
 	public void setVideoStartEvent(UUID videoId, String username, Timestamp timestamp, Keyspace keyspace) {
 
-		Composite rowKey = new Composite();
-
 		Mutator<String> mutator = HFactory.createMutator(keyspace, stringSerializer);
 
 		try {
-
-			rowKey.setComponent(0, username, stringSerializer);
-			rowKey.setComponent(1, videoId, uuidSerializer);
 
 			mutator.addInsertion(username + ":" + videoId, "video_event",
 					HFactory.createStringColumn("start:" + timestamp, ""));
@@ -193,6 +190,7 @@ public class BusinessLogic {
 
 	public Timestamp getVideoLastStopEvent(UUID videoId, String username) {
 		// TODO Implement
+		
 		return null;
 	}
 }
