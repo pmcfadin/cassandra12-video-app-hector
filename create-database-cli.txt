@@ -1,0 +1,61 @@
+create keyspace Killrvideo
+with strategy_options = {replication_factor:1}
+and placement_strategy = 'org.apache.cassandra.locator.SimpleStrategy';
+use Killrvideo;
+
+create column family users with
+  comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: firstname, validation_class: UTF8Type},
+    {column_name: lastname, validation_class: UTF8Type},
+    {column_name: password, validation_class: UTF8Type}
+  ];
+
+create column family videos
+  WITH key_validation_class=UUIDType
+  and comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: videoname, validation_class: UTF8Type},
+    {column_name: username, validation_class: UTF8Type},
+    {column_name: description, validation_class: UTF8Type},
+    {column_name: tags, validation_class: UTF8Type}
+  ];
+  
+create column family comments
+  WITH key_validation_class=UUIDType
+  and comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: comment, validation_class: UTF8Type}
+  ];
+
+
+create column family video_rating
+  WITH key_validation_class=UUIDType 
+  and default_validation_class=CounterColumnType 
+  and replicate_on_write=true;
+
+create column family video_event
+  WITH comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: event, validation_class: UTF8Type}
+  ];
+ 
+create column family username_video_index
+  WITH comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: timestamp, validation_class: UTF8Type}
+  ];
+
+create column family tag_index
+  WITH key_validation_class=UTF8Type and
+  comparator = UTF8Type and
+  column_metadata =
+  [
+    {column_name: videoid, validation_class: UUIDType}
+  ];
+  
