@@ -15,9 +15,9 @@ There are a few methods that have been stubbed-out for you to implement if you w
 
 The stubbed methods are:
 
-getUser
-setVideoWithUserIndex
-getComments
-getRating
-getVideoLastStopEvent
-getCommentsOnTimeSlice
+getUser<br>
+setVideoWithUserIndex<br>
+getComments<br>
+getRating<br>
+getVideoLastStopEvent<br>
+getCommentsOnTimeSlice<br>
